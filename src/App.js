@@ -8,7 +8,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { theme } from './theme';
-import { configureStore } from './store';
+import store from './store';
 import routes from './routes';
 import GoogleAnalytics from './components/GoogleAnalytics';
 import CookiesNotification from './components/CookiesNotification';
@@ -22,7 +22,6 @@ import './mock';
 import './assets/scss/main.scss';
 
 const history = createBrowserHistory();
-const store = configureStore();
 
 function App() {
   const [direction] = useState('ltr');

@@ -17,13 +17,13 @@ import {
   IconButton,
   Badge,
   Link,
-  colors
+  colors,
 } from '@material-ui/core';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import NavItem from 'src/components/NavItem';
 import navConfig from './navConfig';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     height: '100%',
     display: 'flex',
@@ -35,54 +35,57 @@ const useStyles = makeStyles((theme) => ({
   desktopDrawer: {
     width: 256,
     top: 64,
-    height: 'calc(100% - 64px)'
+    height: 'calc(100% - 64px)',
   },
   navigation: {
     overflow: 'auto',
     padding: theme.spacing(0, 2, 2, 2),
-    flexGrow: 1
+    flexGrow: 1,
   },
   profile: {
     padding: theme.spacing(2),
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   badge: {
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
   },
   badgeDot: {
     height: 9,
-    minWidth: 9
+    minWidth: 9,
   },
   onlineBadge: {
-    backgroundColor: colors.green[600]
+    backgroundColor: colors.green[600],
   },
   awayBadge: {
-    backgroundColor: colors.orange[600]
+    backgroundColor: colors.orange[600],
   },
   busyBadge: {
-    backgroundColor: colors.red[600]
+    backgroundColor: colors.red[600],
   },
   offlineBadge: {
-    backgroundColor: colors.grey[300]
+    backgroundColor: colors.grey[300],
   },
   avatar: {
     cursor: 'pointer',
     width: 40,
-    height: 40
+    height: 40,
   },
   details: {
-    marginLeft: theme.spacing(2)
+    marginLeft: theme.spacing(2),
   },
   moreButton: {
     marginLeft: 'auto',
-    color: colors.blueGrey[200]
-  }
+    color: colors.blueGrey[200],
+  },
 }));
 
 function renderNavItems({
   // eslint-disable-next-line react/prop-types
-  items, subheader, key, ...rest
+  items,
+  subheader,
+  key,
+  ...rest
 }) {
   return (
     <List key={key}>
@@ -97,13 +100,11 @@ function renderNavItems({
   );
 }
 
-function reduceChildRoutes({
-  acc, pathname, item, depth = 0
-}) {
+function reduceChildRoutes({ acc, pathname, item, depth = 0 }) {
   if (item.items) {
     const open = matchPath(pathname, {
       path: item.href,
-      exact: false
+      exact: false,
     });
 
     acc.push(
@@ -118,7 +119,7 @@ function reduceChildRoutes({
         {renderNavItems({
           depth: depth + 1,
           pathname,
-          items: item.items
+          items: item.items,
         })}
       </NavItem>
     );
@@ -138,15 +139,10 @@ function reduceChildRoutes({
   return acc;
 }
 
-function NavBar({
-  openMobile,
-  onMobileClose,
-  className,
-  ...rest
-}) {
+function NavBar({ openMobile, onMobileClose, className, ...rest }) {
   const classes = useStyles();
   const location = useLocation();
-  const session = useSelector((state) => state.session);
+  const session = useSelector(state => state.userReducer);
   const [status, setStatus] = useState('online');
 
   const handleStatusToggle = () => {
@@ -154,10 +150,10 @@ function NavBar({
       online: 'away',
       away: 'busy',
       busy: 'offline',
-      offline: 'online'
+      offline: 'online',
     };
 
-    setStatus((prevStatus) => statusSeq[prevStatus]);
+    setStatus(prevStatus => statusSeq[prevStatus]);
   };
 
   useEffect(() => {
@@ -169,17 +165,16 @@ function NavBar({
   }, [location.pathname]);
 
   const content = (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <nav className={classes.navigation}>
-        {navConfig.map((list) => renderNavItems({
-          items: list.items,
-          subheader: list.subheader,
-          pathname: location.pathname,
-          key: list.subheader
-        }))}
+        {navConfig.map(list =>
+          renderNavItems({
+            items: list.items,
+            subheader: list.subheader,
+            pathname: location.pathname,
+            key: list.subheader,
+          })
+        )}
       </nav>
       <Divider className={classes.divider} />
       <div className={classes.profile}>
@@ -196,8 +191,8 @@ function NavBar({
               [classes.onlineBadge]: status === 'online',
               [classes.awayBadge]: status === 'away',
               [classes.busyBadge]: status === 'busy',
-              [classes.offlineBadge]: status === 'offline'
-            })
+              [classes.offlineBadge]: status === 'offline',
+            }),
           }}
           variant="dot"
         >
@@ -220,10 +215,7 @@ function NavBar({
           </Link>
           <Typography variant="body2">{session.user.bio}</Typography>
         </div>
-        <IconButton
-          className={classes.moreButton}
-          size="small"
-        >
+        <IconButton className={classes.moreButton} size="small">
           <MoreIcon />
         </IconButton>
       </div>
@@ -236,7 +228,7 @@ function NavBar({
         <Drawer
           anchor="left"
           classes={{
-            paper: classes.mobileDrawer
+            paper: classes.mobileDrawer,
           }}
           onClose={onMobileClose}
           open={openMobile}
@@ -249,7 +241,7 @@ function NavBar({
         <Drawer
           anchor="left"
           classes={{
-            paper: classes.desktopDrawer
+            paper: classes.desktopDrawer,
           }}
           open
           variant="persistent"
@@ -264,7 +256,7 @@ function NavBar({
 NavBar.propTypes = {
   className: PropTypes.string,
   onMobileClose: PropTypes.func,
-  openMobile: PropTypes.bool
+  openMobile: PropTypes.bool,
 };
 
 export default NavBar;

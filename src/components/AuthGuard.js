@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // Example of user roles: ['GUEST', 'USER', 'ADMIN'];
 
 function AuthGuard({ roles, children }) {
-  const session = useSelector((state) => state.session);
+  const session = useSelector(state => state.userReducer);
   const history = useHistory();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function AuthGuard({ roles, children }) {
 
 AuthGuard.propTypes = {
   children: PropTypes.node,
-  roles: PropTypes.array.isRequired
+  roles: PropTypes.array.isRequired,
 };
 
 export default AuthGuard;
