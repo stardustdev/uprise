@@ -1,9 +1,9 @@
-import * as actionTypes from 'src/actions';
+import * as actionTypes from '../actionTypes';
 
 const initialState = {
-  loggedIn: true,
+  loggedIn: false,
   user: {
-    first_name: 'Kevin',
+    first_name: 'Hello',
     last_name: 'Jiang',
     email: 'demo@devias.io',
     avatar: '/images/avatars/avatar_5.png',
@@ -13,23 +13,14 @@ const initialState = {
 };
 
 const sessionReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case actionTypes.SESSION_LOGIN: {
-      return {
-        ...initialState,
-      };
-    }
+  const { type, payload } = action;
 
-    case actionTypes.SESSION_LOGOUT: {
+  switch (type) {
+    case actionTypes.USER_LOGIN_SUCCESS:
       return {
         ...state,
-        loggedIn: false,
-        user: {
-          role: 'GUEST',
-        },
+        user: payload,
       };
-    }
-
     default: {
       return state;
     }
