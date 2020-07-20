@@ -9,14 +9,14 @@ const useStyles = makeStyles(() => ({
     minHeight: '100vh',
     display: 'flex',
     '@media all and (-ms-high-contrast:none)': {
-      height: 0 // IE11 fix
-    }
+      height: 0, // IE11 fix
+    },
   },
   content: {
     flexGrow: 1,
     maxWidth: '100%',
-    overflowX: 'hidden'
-  }
+    overflowX: 'hidden',
+  },
 }));
 
 function Error({ route }) {
@@ -34,7 +34,7 @@ function Error({ route }) {
 }
 
 Error.propTypes = {
-  route: PropTypes.object
+  route: PropTypes.object,
 };
 
 export default Error;

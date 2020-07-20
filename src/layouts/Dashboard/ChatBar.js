@@ -17,30 +17,25 @@ import {
 import axios from 'src/utils/axios';
 import StatusBullet from 'src/components/StatusBullet';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   drawer: {
-    width: 280
+    width: 280,
   },
   root: {
-    backgroundColor: theme.palette.common.white
+    backgroundColor: theme.palette.common.white,
   },
   list: {
-    padding: theme.spacing(1, 3)
+    padding: theme.spacing(1, 3),
   },
   listItemText: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   lastActivity: {
-    whiteSpace: 'nowrap'
-  }
+    whiteSpace: 'nowrap',
+  },
 }));
 
-function ChatBar({
-  open,
-  onClose,
-  className,
-  ...rest
-}) {
+function ChatBar({ open, onClose, className, ...rest }) {
   const classes = useStyles();
   const [data, setData] = useState(null);
 
@@ -48,7 +43,7 @@ function ChatBar({
     let mounted = true;
 
     const fetchData = () => {
-      axios.get('/api/chat/activity').then((response) => {
+      axios.get('/api/chat/activity').then(response => {
         if (mounted) {
           setData(response.data);
         }
@@ -75,30 +70,21 @@ function ChatBar({
       open={open}
       variant="temporary"
     >
-      <div
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
-        {data.groups.map((group) => (
+      <div {...rest} className={clsx(classes.root, className)}>
+        {data.groups.map(group => (
           <List
             className={classes.list}
             key={group.id}
-            subheader={(
-              <ListSubheader
-                disableGutters
-                disableSticky
-              >
+            subheader={
+              <ListSubheader disableGutters disableSticky>
                 {group.name}
               </ListSubheader>
-            )}
+            }
           >
             {data.connections
-              .filter((connection) => group.id === connection.group)
-              .map((connection) => (
-                <ListItem
-                  disableGutters
-                  key={connection.id}
-                >
+              .filter(connection => group.id === connection.group)
+              .map(connection => (
+                <ListItem disableGutters key={connection.id}>
                   <ListItemAvatar>
                     <Avatar
                       alt="Person"
@@ -110,7 +96,7 @@ function ChatBar({
                   <ListItemText
                     className={classes.listItemText}
                     disableTypography
-                    primary={(
+                    primary={
                       <Typography
                         component={RouterLink}
                         display="block"
@@ -120,13 +106,10 @@ function ChatBar({
                       >
                         {connection.name}
                       </Typography>
-                    )}
+                    }
                   />
                   {connection.active ? (
-                    <StatusBullet
-                      color="success"
-                      size="small"
-                    />
+                    <StatusBullet color="success" size="small" />
                   ) : (
                     <Typography
                       className={classes.lastActivity}
@@ -147,7 +130,7 @@ function ChatBar({
 ChatBar.propTypes = {
   className: PropTypes.string,
   onClose: PropTypes.func,
-  open: PropTypes.bool
+  open: PropTypes.bool,
 };
 
 export default ChatBar;

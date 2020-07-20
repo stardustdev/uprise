@@ -5,13 +5,13 @@ import { makeStyles } from '@material-ui/styles';
 import { LinearProgress } from '@material-ui/core';
 import Topbar from './Topbar';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   container: {
     minHeight: '100vh',
     display: 'flex',
     '@media all and (-ms-high-contrast:none)': {
-      height: 0 // IE11 fix
-    }
+      height: 0, // IE11 fix
+    },
   },
   content: {
     flexGrow: 1,
@@ -19,9 +19,9 @@ const useStyles = makeStyles((theme) => ({
     overflowX: 'hidden',
     paddingTop: 64,
     [theme.breakpoints.down('xs')]: {
-      paddingTop: 56
-    }
-  }
+      paddingTop: 56,
+    },
+  },
 }));
 
 function Auth({ route }) {
@@ -42,7 +42,7 @@ function Auth({ route }) {
 }
 
 Auth.propTypes = {
-  route: PropTypes.object
+  route: PropTypes.object,
 };
 
 export default Auth;

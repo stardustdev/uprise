@@ -10,10 +10,10 @@ import {
   CardActions,
   Typography,
   Divider,
-  Button
+  Button,
 } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     position: 'absolute',
     top: '50%',
@@ -24,20 +24,18 @@ const useStyles = makeStyles((theme) => ({
     width: 700,
     maxHeight: '100%',
     overflowY: 'auto',
-    maxWidth: '100%'
+    maxWidth: '100%',
   },
   container: {
     marginTop: theme.spacing(3),
-    height: 200
+    height: 200,
   },
   actions: {
-    justifyContent: 'flex-end'
-  }
+    justifyContent: 'flex-end',
+  },
 }));
 
-function BaseModal({
-  open, onClose, className, ...rest
-}) {
+function BaseModal({ open, onClose, className, ...rest }) {
   const classes = useStyles();
 
   if (!open) {
@@ -45,31 +43,17 @@ function BaseModal({
   }
 
   return (
-    <Modal
-      onClose={onClose}
-      open={open}
-    >
-      <Card
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
+    <Modal onClose={onClose} open={open}>
+      <Card {...rest} className={clsx(classes.root, className)}>
         <CardHeader title="Simple Modal" />
         <Divider />
         <CardContent>
-          <Typography variant="body1">
-            One fine body...
-          </Typography>
+          <Typography variant="body1">One fine body...</Typography>
         </CardContent>
         <Divider />
         <CardActions className={classes.actions}>
-          <Button onClick={onClose}>
-            Dismiss
-          </Button>
-          <Button
-            color="primary"
-            onClick={onClose}
-            variant="contained"
-          >
+          <Button onClick={onClose}>Dismiss</Button>
+          <Button color="primary" onClick={onClose} variant="contained">
             Confirm
           </Button>
         </CardActions>
@@ -81,12 +65,12 @@ function BaseModal({
 BaseModal.propTypes = {
   className: PropTypes.string,
   onClose: PropTypes.func,
-  open: PropTypes.bool
+  open: PropTypes.bool,
 };
 
 BaseModal.defaultProps = {
   open: false,
-  onClose: () => {}
+  onClose: () => {},
 };
 
 export default BaseModal;

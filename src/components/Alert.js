@@ -2,59 +2,57 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
-import {
-  Paper, IconButton, Typography, colors
-} from '@material-ui/core';
+import { Paper, IconButton, Typography, colors } from '@material-ui/core';
 import CheckCircleIcon from '@material-ui/icons/CheckCircleOutlined';
 import CloseIcon from '@material-ui/icons/CloseOutlined';
 import ErrorIcon from '@material-ui/icons/ErrorOutlined';
 import InfoIcon from '@material-ui/icons/InfoOutlined';
 import WarningIcon from '@material-ui/icons/WarningOutlined';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     alignItems: 'center',
     padding: '6px 16px',
-    borderRadius: theme.shape.borderRadius
+    borderRadius: theme.shape.borderRadius,
   },
   default: {
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText
+    color: theme.palette.primary.contrastText,
   },
   success: {
     backgroundColor: colors.green[600],
-    color: theme.palette.common.white
+    color: theme.palette.common.white,
   },
   info: {
     backgroundColor: colors.lightBlue[600],
-    color: theme.palette.common.white
+    color: theme.palette.common.white,
   },
   warning: {
     backgroundColor: colors.orange[900],
-    color: theme.palette.common.white
+    color: theme.palette.common.white,
   },
   error: {
     backgroundColor: theme.palette.error.main,
-    color: theme.palette.error.contrastText
+    color: theme.palette.error.contrastText,
   },
   message: {
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
-    padding: '8px 0'
+    padding: '8px 0',
   },
   icon: {
     fontSize: 20,
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   action: {
     display: 'flex',
     alignItems: 'center',
     marginLeft: 'auto',
     paddingLeft: 16,
-    marginRight: -8
-  }
+    marginRight: -8,
+  },
 }));
 
 const icons = {
@@ -62,13 +60,11 @@ const icons = {
   success: <CheckCircleIcon />,
   info: <InfoIcon />,
   warning: <WarningIcon />,
-  error: <ErrorIcon />
+  error: <ErrorIcon />,
 };
 
 const Alert = forwardRef((props, ref) => {
-  const {
-    className, icon, variant, message, onClose, ...rest
-  } = props;
+  const { className, icon, variant, message, onClose, ...rest } = props;
   const classes = useStyles();
 
   return (
@@ -103,11 +99,11 @@ Alert.propTypes = {
   icon: PropTypes.node,
   message: PropTypes.string.isRequired,
   onClose: PropTypes.func,
-  variant: PropTypes.oneOf(['default', 'info', 'success', 'warning', 'error'])
+  variant: PropTypes.oneOf(['default', 'info', 'success', 'warning', 'error']),
 };
 
 Alert.defaultProps = {
-  variant: 'default'
+  variant: 'default',
 };
 
 export default Alert;

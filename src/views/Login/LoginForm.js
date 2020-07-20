@@ -7,19 +7,18 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import { Button, TextField } from '@material-ui/core';
-import { login } from 'src/actions';
 
 const schema = {
   email: {
     presence: { allowEmpty: false, message: 'is required' },
-    email: true
+    email: true,
   },
   password: {
-    presence: { allowEmpty: false, message: 'is required' }
-  }
+    presence: { allowEmpty: false, message: 'is required' },
+  },
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   fields: {
     margin: theme.spacing(-1),
@@ -27,13 +26,13 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     '& > *': {
       flexGrow: 1,
-      margin: theme.spacing(1)
-    }
+      margin: theme.spacing(1),
+    },
   },
   submitButton: {
     marginTop: theme.spacing(2),
-    width: '100%'
-  }
+    width: '100%',
+  },
 }));
 
 function LoginForm({ className, ...rest }) {
@@ -44,43 +43,44 @@ function LoginForm({ className, ...rest }) {
     isValid: false,
     values: {},
     touched: {},
-    errors: {}
+    errors: {},
   });
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     event.persist();
 
-    setFormState((prevFormState) => ({
+    setFormState(prevFormState => ({
       ...prevFormState,
       values: {
         ...prevFormState.values,
         [event.target.name]:
           event.target.type === 'checkbox'
             ? event.target.checked
-            : event.target.value
+            : event.target.value,
       },
       touched: {
         ...prevFormState.touched,
-        [event.target.name]: true
-      }
+        [event.target.name]: true,
+      },
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault();
     // dispatch(login());
     history.push('/');
   };
 
-  const hasError = (field) => (!!(formState.touched[field] && formState.errors[field]));
+  const hasError = field =>
+    !!(formState.touched[field] && formState.errors[field]);
 
   useEffect(() => {
     const errors = validate(formState.values, schema);
 
-    setFormState((prevFormState) => ({
+    setFormState(prevFormState => ({
       ...prevFormState,
       isValid: !errors,
-      errors: errors || {}
+      errors: errors || {},
     }));
   }, [formState.values]);
 
@@ -130,7 +130,7 @@ function LoginForm({ className, ...rest }) {
 }
 
 LoginForm.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default LoginForm;

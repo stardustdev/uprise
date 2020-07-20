@@ -7,27 +7,27 @@ import {
   Button,
   Card,
   CardContent,
-  colors
+  colors,
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import CustomerEditModal from 'src/views/CustomerManagementDetails/Summary/CustomerEditModal';
 import BaseModal from './BaseModal';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3)
+    paddingBottom: theme.spacing(3),
   },
   divider: {
     backgroundColor: colors.grey[300],
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3)
+    marginBottom: theme.spacing(3),
   },
   section: {
     '& + &': {
-      marginTop: theme.spacing(5)
-    }
-  }
+      marginTop: theme.spacing(5),
+    },
+  },
 }));
 
 function Modals() {
@@ -36,26 +36,15 @@ function Modals() {
   const [openCustomer, setOpenCustomer] = useState(false);
 
   return (
-    <Page
-      className={classes.root}
-      title="Modals"
-    >
+    <Page className={classes.root} title="Modals">
       <Container maxWidth="lg">
-        <Typography variant="overline">
-          Components
-        </Typography>
-        <Typography
-          gutterBottom
-          variant="h3"
-        >
+        <Typography variant="overline">Components</Typography>
+        <Typography gutterBottom variant="h3">
           Modals
         </Typography>
         <Divider className={classes.divider} />
         <div className={classes.section}>
-          <Typography
-            gutterBottom
-            variant="h4"
-          >
+          <Typography gutterBottom variant="h4">
             Simple Modal
           </Typography>
           <Card>
@@ -69,16 +58,10 @@ function Modals() {
               </Button>
             </CardContent>
           </Card>
-          <BaseModal
-            onClose={() => setOpenBase(false)}
-            open={openBase}
-          />
+          <BaseModal onClose={() => setOpenBase(false)} open={openBase} />
         </div>
         <div className={classes.section}>
-          <Typography
-            gutterBottom
-            variant="h4"
-          >
+          <Typography gutterBottom variant="h4">
             Example Modal
           </Typography>
           <Card>
@@ -102,7 +85,7 @@ function Modals() {
               address1: '',
               address2: '',
               verified: true,
-              discountedPrices: false
+              discountedPrices: false,
             }}
             onClose={() => setOpenCustomer(false)}
             open={openCustomer}

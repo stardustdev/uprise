@@ -7,23 +7,23 @@ import { ListItem, Button, Collapse } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   item: {
     display: 'block',
     paddingTop: 0,
-    paddingBottom: 0
+    paddingBottom: 0,
   },
   itemLeaf: {
     display: 'flex',
     paddingTop: 0,
-    paddingBottom: 0
+    paddingBottom: 0,
   },
   button: {
     padding: '10px 8px',
     justifyContent: 'flex-start',
     textTransform: 'none',
     letterSpacing: 0,
-    width: '100%'
+    width: '100%',
   },
   buttonLeaf: {
     padding: '10px 8px',
@@ -33,32 +33,32 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     fontWeight: theme.typography.fontWeightRegular,
     '&.depth-0': {
-      fontWeight: theme.typography.fontWeightMedium
-    }
+      fontWeight: theme.typography.fontWeightMedium,
+    },
   },
   icon: {
     color: theme.palette.icon,
     display: 'flex',
     alignItems: 'center',
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   expandIcon: {
     marginLeft: 'auto',
     height: 16,
-    width: 16
+    width: 16,
   },
   label: {
     display: 'flex',
     alignItems: 'center',
-    marginLeft: 'auto'
+    marginLeft: 'auto',
   },
   active: {
     color: theme.palette.primary.main,
     fontWeight: theme.typography.fontWeightMedium,
     '& $icon': {
-      color: theme.palette.primary.main
-    }
-  }
+      color: theme.palette.primary.main,
+    },
+  },
 }));
 
 function NavItem({
@@ -76,7 +76,7 @@ function NavItem({
   const [open, setOpen] = useState(openProp);
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen(prevOpen => !prevOpen);
   };
 
   let paddingLeft = 8;
@@ -86,7 +86,7 @@ function NavItem({
   }
 
   const style = {
-    paddingLeft
+    paddingLeft,
   };
 
   if (children) {
@@ -97,23 +97,13 @@ function NavItem({
         disableGutters
         key={title}
       >
-        <Button
-          className={classes.button}
-          onClick={handleToggle}
-          style={style}
-        >
+        <Button className={classes.button} onClick={handleToggle} style={style}>
           {Icon && <Icon className={classes.icon} />}
           {title}
           {open ? (
-            <ExpandLessIcon
-              className={classes.expandIcon}
-              color="inherit"
-            />
+            <ExpandLessIcon className={classes.expandIcon} color="inherit" />
           ) : (
-            <ExpandMoreIcon
-              className={classes.expandIcon}
-              color="inherit"
-            />
+            <ExpandMoreIcon className={classes.expandIcon} color="inherit" />
           )}
         </Button>
         <Collapse in={open}>{children}</Collapse>
@@ -139,9 +129,9 @@ function NavItem({
         {Icon && <Icon className={classes.icon} />}
         {title}
         {Label && (
-        <span className={classes.label}>
-          <Label />
-        </span>
+          <span className={classes.label}>
+            <Label />
+          </span>
         )}
       </Button>
     </ListItem>
@@ -156,11 +146,11 @@ NavItem.propTypes = {
   icon: PropTypes.any,
   label: PropTypes.any,
   open: PropTypes.bool,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 };
 
 NavItem.defaultProps = {
-  open: false
+  open: false,
 };
 
 export default NavItem;

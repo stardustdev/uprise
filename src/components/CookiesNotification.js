@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { makeStyles } from '@material-ui/styles';
-import {
-  Paper, Typography, Link, Button
-} from '@material-ui/core';
+import { Paper, Typography, Link, Button } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 420,
     position: 'fixed',
@@ -13,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     margin: theme.spacing(3),
     outline: 'none',
-    zIndex: 2000
+    zIndex: 2000,
   },
   media: {
     padding: theme.spacing(1, 2),
@@ -21,15 +19,15 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     '& > img': {
       height: '100%',
-      width: 'auto'
-    }
+      width: 'auto',
+    },
   },
   content: {
-    padding: theme.spacing(1, 2)
+    padding: theme.spacing(1, 2),
   },
   actions: {
-    padding: theme.spacing(2)
-  }
+    padding: theme.spacing(2),
+  },
 }));
 
 function CookiesNotification() {
@@ -54,21 +52,14 @@ function CookiesNotification() {
   }
 
   return (
-    <Paper
-      className={classes.root}
-      elevation={3}
-    >
+    <Paper className={classes.root} elevation={3}>
       <div className={classes.media}>
-        <img
-          alt="Cookies"
-          src="/images/undraw_cookie_love_ulvn.svg"
-        />
+        <img alt="Cookies" src="/images/undraw_cookie_love_ulvn.svg" />
       </div>
       <div className={classes.content}>
         <Typography variant="body1">
           We use Cookies to ensure that we give you the best experience on our
-          website. Read our
-          {' '}
+          website. Read our{' '}
           <Link
             className={classes.link}
             component="a"

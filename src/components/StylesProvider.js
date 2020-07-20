@@ -20,7 +20,7 @@ function CustomStylesProvider({ direction, children }) {
 
 CustomStylesProvider.propTypes = {
   children: PropTypes.node,
-  direction: PropTypes.string
+  direction: PropTypes.string,
 };
 
 export default CustomStylesProvider;

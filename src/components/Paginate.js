@@ -5,13 +5,13 @@ import { makeStyles } from '@material-ui/styles';
 import { colors } from '@material-ui/core';
 import ReactPaginate from 'react-paginate';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     ...theme.typography.button,
     listStyle: 'none',
     userSelect: 'none',
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   active: {},
   activeLink: {},
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   breakLink: {},
   disabled: {},
   next: {
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   nextLink: {
     padding: '6px 16px',
@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     borderRadius: 4,
     '&:hover': {
-      backgroundColor: colors.blueGrey[50]
-    }
+      backgroundColor: colors.blueGrey[50],
+    },
   },
   page: {},
   pageLink: {
@@ -43,15 +43,15 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     '&:hover': {
       backgroundColor: colors.blueGrey[50],
-      color: theme.palette.text.primary
+      color: theme.palette.text.primary,
     },
     '&$activeLink': {
       backgroundColor: colors.blueGrey[50],
-      color: theme.palette.text.primary
-    }
+      color: theme.palette.text.primary,
+    },
   },
   previous: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   previousLink: {
     padding: '6px 16px',
@@ -59,9 +59,9 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     borderRadius: 4,
     '&:hover': {
-      backgroundColor: colors.blueGrey[50]
-    }
-  }
+      backgroundColor: colors.blueGrey[50],
+    },
+  },
 }));
 
 function Paginate({
@@ -104,13 +104,13 @@ Paginate.propTypes = {
   className: PropTypes.string,
   onPageChange: PropTypes.func,
   pageCount: PropTypes.number,
-  pageRangeDisplayed: PropTypes.number
+  pageRangeDisplayed: PropTypes.number,
 };
 
 Paginate.defaultProps = {
   onPageChange: () => {},
   pageCount: 3,
-  pageRangeDisplayed: 5
+  pageRangeDisplayed: 5,
 };
 
 export default Paginate;

@@ -31,7 +31,6 @@ import HelpIcon from '@material-ui/icons/Help';
 import axios from 'src/utils/axios';
 import NotificationsPopover from 'src/components/NotificationsPopover';
 import PricingModal from 'src/components/PricingModal';
-import { logout } from 'src/actions';
 import ChatBar from './ChatBar';
 
 const useStyles = makeStyles(theme => ({

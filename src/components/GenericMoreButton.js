@@ -1,8 +1,4 @@
-import React, {
-  useRef,
-  useState,
-  memo
-} from 'react';
+import React, { useRef, useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import {
   ListItemIcon,
@@ -10,7 +6,7 @@ import {
   Tooltip,
   IconButton,
   Menu,
-  MenuItem
+  MenuItem,
 } from '@material-ui/core';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import GetAppIcon from '@material-ui/icons/GetApp';
@@ -47,14 +43,14 @@ function GenericMoreButton(props) {
         anchorEl={moreRef.current}
         anchorOrigin={{
           vertical: 'top',
-          horizontal: 'left'
+          horizontal: 'left',
         }}
         elevation={1}
         onClose={handleMenuClose}
         open={openMenu}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'left'
+          horizontal: 'left',
         }}
       >
         <MenuItem>
@@ -93,7 +89,7 @@ function GenericMoreButton(props) {
 }
 
 GenericMoreButton.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default memo(GenericMoreButton);

@@ -5,10 +5,10 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
-  root: {}
+  root: {},
 }));
 
-const trimCode = (input) => {
+const trimCode = input => {
   const codeLines = input.split('\n');
 
   if (!codeLines[0].trim()) {
@@ -55,11 +55,7 @@ function CodeBlock({
 
   return (
     <pre className={`language-${language}`}>
-      <Component
-        {...rest}
-        className={clsx(classes.root, className)}
-        ref={ref}
-      >
+      <Component {...rest} className={clsx(classes.root, className)} ref={ref}>
         {trimCode(source)}
       </Component>
     </pre>
@@ -71,11 +67,11 @@ CodeBlock.propTypes = {
   className: PropTypes.string,
   component: PropTypes.node,
   language: PropTypes.string.isRequired,
-  source: PropTypes.string.isRequired
+  source: PropTypes.string.isRequired,
 };
 
 CodeBlock.defaultProps = {
-  component: 'code'
+  component: 'code',
 };
 
 export default CodeBlock;

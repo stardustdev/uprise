@@ -33,5 +33,5 @@ export default {
   MuiTableHead,
   MuiTableRow,
   MuiToggleButton,
-  MuiTypography
+  MuiTypography,
 };

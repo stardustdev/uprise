@@ -4,7 +4,10 @@ import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
 
-const { NODE_ENV, REACT_APP_GA_MEASUREMENT_ID: GA_MEASUREMENT_ID } = process.env;
+const {
+  NODE_ENV,
+  REACT_APP_GA_MEASUREMENT_ID: GA_MEASUREMENT_ID,
+} = process.env;
 
 function Page({ title, children, ...rest }) {
   const location = useLocation();
@@ -17,7 +20,7 @@ function Page({ title, children, ...rest }) {
     if (window.gtag) {
       window.gtag('config', GA_MEASUREMENT_ID, {
         page_path: location.pathname,
-        page_name: title
+        page_name: title,
       });
     }
 
@@ -36,7 +39,7 @@ function Page({ title, children, ...rest }) {
 
 Page.propTypes = {
   children: PropTypes.node,
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 export default Page;

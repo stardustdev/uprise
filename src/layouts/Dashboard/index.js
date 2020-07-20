@@ -6,13 +6,13 @@ import { LinearProgress } from '@material-ui/core';
 import NavBar from './NavBar';
 import TopBar from './TopBar';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   container: {
     minHeight: '100vh',
     display: 'flex',
     '@media all and (-ms-high-contrast:none)': {
-      height: 0 // IE11 fix
-    }
+      height: 0, // IE11 fix
+    },
   },
   content: {
     paddingTop: 64,
@@ -20,12 +20,12 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '100%',
     overflowX: 'hidden',
     [theme.breakpoints.up('lg')]: {
-      paddingLeft: 256
+      paddingLeft: 256,
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: 56
-    }
-  }
+      paddingTop: 56,
+    },
+  },
 }));
 
 function Dashboard({ route }) {
@@ -51,7 +51,7 @@ function Dashboard({ route }) {
 }
 
 Dashboard.propTypes = {
-  route: PropTypes.object
+  route: PropTypes.object,
 };
 
 export default Dashboard;

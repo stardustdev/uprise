@@ -4,54 +4,52 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { colors } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'inline-block',
     borderRadius: '50%',
     flexGrow: 0,
-    flexShrink: 0
+    flexShrink: 0,
   },
   small: {
     height: theme.spacing(1),
-    width: theme.spacing(1)
+    width: theme.spacing(1),
   },
   medium: {
     height: theme.spacing(2),
-    width: theme.spacing(2)
+    width: theme.spacing(2),
   },
   large: {
     height: theme.spacing(3),
-    width: theme.spacing(3)
+    width: theme.spacing(3),
   },
   default: {
-    backgroundColor: colors.grey[50]
+    backgroundColor: colors.grey[50],
   },
   primary: {
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.main,
   },
   info: {
-    backgroundColor: colors.lightBlue[600]
+    backgroundColor: colors.lightBlue[600],
   },
   warning: {
-    backgroundColor: colors.orange[900]
+    backgroundColor: colors.orange[900],
   },
   error: {
-    backgroundColor: theme.palette.error.main
+    backgroundColor: theme.palette.error.main,
   },
   success: {
-    backgroundColor: colors.green[600]
-  }
+    backgroundColor: colors.green[600],
+  },
 }));
 
-function StatusBullet({
-  className, size, color, ...rest
-}) {
+function StatusBullet({ className, size, color, ...rest }) {
   const classes = useStyles();
   const rootClassName = clsx(
     {
       [classes.root]: true,
       [classes[size]]: size,
-      [classes[color]]: color
+      [classes[color]]: color,
     },
     className
   );
@@ -73,14 +71,14 @@ StatusBullet.propTypes = {
     'info',
     'success',
     'warning',
-    'error'
+    'error',
   ]),
-  size: PropTypes.oneOf(['small', 'medium', 'large'])
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
 };
 
 StatusBullet.defaultProps = {
   size: 'medium',
-  color: 'default'
+  color: 'default',
 };
 
 export default StatusBullet;

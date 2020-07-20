@@ -16,7 +16,7 @@ import {
   Link,
   Tooltip,
   Typography,
-  colors
+  colors,
 } from '@material-ui/core';
 import ShareIcon from '@material-ui/icons/Share';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -24,38 +24,38 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import getInitials from 'src/utils/getInitials';
 import Label from 'src/components/Label';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   header: {
-    paddingBottom: 0
+    paddingBottom: 0,
   },
   content: {
     padding: 0,
     '&:last-child': {
-      paddingBottom: 0
-    }
+      paddingBottom: 0,
+    },
   },
   description: {
-    padding: theme.spacing(2, 3, 1, 3)
+    padding: theme.spacing(2, 3, 1, 3),
   },
   tags: {
     padding: theme.spacing(0, 3, 2, 3),
     '& > * + *': {
-      marginLeft: theme.spacing(1)
-    }
+      marginLeft: theme.spacing(1),
+    },
   },
   learnMoreButton: {
-    marginLeft: theme.spacing(2)
+    marginLeft: theme.spacing(2),
   },
   likedButton: {
-    color: colors.red[600]
+    color: colors.red[600],
   },
   shareButton: {
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   details: {
-    padding: theme.spacing(2, 3)
-  }
+    padding: theme.spacing(2, 3),
+  },
 }));
 
 function ProjectCard({ project, className, ...rest }) {
@@ -71,25 +71,18 @@ function ProjectCard({ project, className, ...rest }) {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
-        avatar={(
-          <Avatar
-            alt="Author"
-            src={project.author.avatar}
-          >
+        avatar={
+          <Avatar alt="Author" src={project.author.avatar}>
             {getInitials(project.author.name)}
           </Avatar>
-        )}
+        }
         className={classes.header}
         disableTypography
-        subheader={(
+        subheader={
           <Typography variant="body2">
-            by
-            {' '}
+            by{' '}
             <Link
               color="textPrimary"
               component={RouterLink}
@@ -97,14 +90,11 @@ function ProjectCard({ project, className, ...rest }) {
               variant="h6"
             >
               {project.author.name}
-            </Link>
-            {' '}
-            | Updated:
-            {' '}
-            {moment(project.updated_at).fromNow()}
+            </Link>{' '}
+            | Updated: {moment(project.updated_at).fromNow()}
           </Typography>
-        )}
-        title={(
+        }
+        title={
           <Link
             color="textPrimary"
             component={RouterLink}
@@ -113,24 +103,19 @@ function ProjectCard({ project, className, ...rest }) {
           >
             {project.title}
           </Link>
-        )}
+        }
       />
       <CardContent className={classes.content}>
         <div className={classes.description}>
-          <Typography
-            color="textSecondary"
-            variant="subtitle2"
-          >
-            We&apos;re looking for experienced Developers and Product Designers to
-            come aboard and help us build succesful businesses through software.
+          <Typography color="textSecondary" variant="subtitle2">
+            We&apos;re looking for experienced Developers and Product Designers
+            to come aboard and help us build succesful businesses through
+            software.
           </Typography>
         </div>
         <div className={classes.tags}>
-          {project.tags.map((tag) => (
-            <Label
-              color={tag.color}
-              key={tag.text}
-            >
+          {project.tags.map(tag => (
+            <Label color={tag.color} key={tag.text}>
               {tag.text}
             </Label>
           ))}
@@ -144,10 +129,7 @@ function ProjectCard({ project, className, ...rest }) {
             spacing={3}
           >
             <Grid item>
-              <Typography variant="h5">
-                $
-                {project.price}
-              </Typography>
+              <Typography variant="h5">${project.price}</Typography>
               <Typography variant="body2">Per Project</Typography>
             </Grid>
             <Grid item>
@@ -181,10 +163,7 @@ function ProjectCard({ project, className, ...rest }) {
                 </Tooltip>
               )}
               <Tooltip title="Share">
-                <IconButton
-                  className={classes.shareButton}
-                  size="small"
-                >
+                <IconButton className={classes.shareButton} size="small">
                   <ShareIcon />
                 </IconButton>
               </Tooltip>
@@ -206,7 +185,7 @@ function ProjectCard({ project, className, ...rest }) {
 
 ProjectCard.propTypes = {
   className: PropTypes.string,
-  project: PropTypes.object.isRequired
+  project: PropTypes.object.isRequired,
 };
 
 export default ProjectCard;

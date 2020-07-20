@@ -11,42 +11,42 @@ import {
   FormHelperText,
   TextField,
   Typography,
-  Link
+  Link,
 } from '@material-ui/core';
 
 const schema = {
   firstName: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
-      maximum: 32
-    }
+      maximum: 32,
+    },
   },
   lastName: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
-      maximum: 32
-    }
+      maximum: 32,
+    },
   },
   email: {
     presence: { allowEmpty: false, message: 'is required' },
     email: true,
     length: {
-      maximum: 64
-    }
+      maximum: 64,
+    },
   },
   password: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
-      maximum: 128
-    }
+      maximum: 128,
+    },
   },
   policy: {
     presence: { allowEmpty: false, message: 'is required' },
-    checked: true
-  }
+    checked: true,
+  },
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   fields: {
     margin: theme.spacing(-1),
@@ -54,20 +54,20 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     '& > *': {
       flexGrow: 1,
-      margin: theme.spacing(1)
-    }
+      margin: theme.spacing(1),
+    },
   },
   policy: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   policyCheckbox: {
-    marginLeft: '-14px'
+    marginLeft: '-14px',
   },
   submitButton: {
     marginTop: theme.spacing(2),
-    width: '100%'
-  }
+    width: '100%',
+  },
 }));
 
 function RegisterForm({ className, ...rest }) {
@@ -77,42 +77,43 @@ function RegisterForm({ className, ...rest }) {
     isValid: false,
     values: {},
     touched: {},
-    errors: {}
+    errors: {},
   });
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     event.persist();
 
-    setFormState((prevFormState) => ({
+    setFormState(prevFormState => ({
       ...prevFormState,
       values: {
         ...prevFormState.values,
         [event.target.name]:
           event.target.type === 'checkbox'
             ? event.target.checked
-            : event.target.value
+            : event.target.value,
       },
       touched: {
         ...prevFormState.touched,
-        [event.target.name]: true
-      }
+        [event.target.name]: true,
+      },
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     history.push('/');
   };
 
-  const hasError = (field) => !!(formState.touched[field] && formState.errors[field]);
+  const hasError = field =>
+    !!(formState.touched[field] && formState.errors[field]);
 
   useEffect(() => {
     const errors = validate(formState.values, schema);
 
-    setFormState((prevFormState) => ({
+    setFormState(prevFormState => ({
       ...prevFormState,
       isValid: !errors,
-      errors: errors || {}
+      errors: errors || {},
     }));
   }, [formState.values]);
 
@@ -177,12 +178,8 @@ function RegisterForm({ className, ...rest }) {
               name="policy"
               onChange={handleChange}
             />
-            <Typography
-              color="textSecondary"
-              variant="body1"
-            >
-              I have read the
-              {' '}
+            <Typography color="textSecondary" variant="body1">
+              I have read the{' '}
               <Link
                 color="secondary"
                 component={RouterLink}
@@ -214,7 +211,7 @@ function RegisterForm({ className, ...rest }) {
 }
 
 RegisterForm.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default RegisterForm;
