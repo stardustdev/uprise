@@ -39,17 +39,17 @@ export default [
       {
         path: '/errors/error-401',
         exact: true,
-        component: lazy(() => import('src/views/Error401')),
+        component: lazy(() => import('src/views/Error/Error401')),
       },
       {
         path: '/errors/error-404',
         exact: true,
-        component: lazy(() => import('src/views/Error404')),
+        component: lazy(() => import('src/views/Error/Error404')),
       },
       {
         path: '/errors/error-500',
         exact: true,
-        component: lazy(() => import('src/views/Error500')),
+        component: lazy(() => import('src/views/Error/Error500')),
       },
       {
         component: () => <Redirect to="/errors/error-404" />,
@@ -69,6 +69,11 @@ export default [
         path: '/advocates',
         exact: true,
         component: lazy(() => import('src/views/Advocates')),
+      },
+      {
+        path: '/campaigns',
+        exact: true,
+        component: lazy(() => import('src/views/Campaigns')),
       },
       {
         component: () => <Redirect to="/errors/error-404" />,
