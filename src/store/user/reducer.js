@@ -12,7 +12,7 @@ const initialState = {
   },
 };
 
-const sessionReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -27,4 +27,4 @@ const sessionReducer = (state = initialState, action) => {
   }
 };
 
-export default sessionReducer;
+export default userReducer;

@@ -69,6 +69,8 @@ function HelpModal({ open, onClose, className, ...rest }) {
       alert('data is missing');
       return;
     }
+    setSubject('');
+    setMessage('');
     onClose();
   };
 
