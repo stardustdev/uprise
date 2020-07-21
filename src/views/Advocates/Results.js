@@ -18,11 +18,14 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  Button,
 } from '@material-ui/core';
 import GenericMoreButton from 'src/components/GenericMoreButton';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import InstagramIcon from '@material-ui/icons/Instagram';
+
+import Search from 'src/components/Search';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -61,6 +64,7 @@ const headCells = [
 
 const useStyles = makeStyles(theme => ({
   root: {},
+  header: {},
   content: {
     padding: 0,
   },
@@ -157,7 +161,20 @@ function Results({ className, customers, ...rest }) {
   return (
     <div {...rest} className={clsx(classes.root, className)}>
       <Card>
-        <CardHeader title="ADVOCATES LIST" />
+        <CardHeader
+          className={classes.header}
+          action={
+            <div style={{ display: 'flex' }}>
+              <Search />
+              <Button color="secondary" variant="contained">
+                Delete Advocates
+              </Button>
+              <Button color="primary" variant="text">
+                Add Advocates
+              </Button>
+            </div>
+          }
+        />
         <Divider />
         <CardContent className={classes.content}>
           <PerfectScrollbar>

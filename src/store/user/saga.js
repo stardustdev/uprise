@@ -15,7 +15,7 @@ function* userLogin(actionData) {
     };
     yield put(actions.userLoginSuccess(user));
   } catch {
-    yield put(actions.userLoginError());
+    // yield put(actions.userLoginError());
   }
 }
 
