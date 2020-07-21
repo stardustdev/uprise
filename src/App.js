@@ -10,8 +10,6 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import { theme } from './theme';
 import store from './store';
 import routes from './routes';
-import GoogleAnalytics from './components/GoogleAnalytics';
-import CookiesNotification from './components/CookiesNotification';
 import ScrollReset from './components/ScrollReset';
 import StylesProvider from './components/StylesProvider';
 import './mixins/chartjs';
@@ -33,8 +31,6 @@ function App() {
           <MuiPickersUtilsProvider utils={MomentUtils}>
             <Router history={history}>
               <ScrollReset />
-              <GoogleAnalytics />
-              <CookiesNotification />
               {renderRoutes(routes)}
             </Router>
           </MuiPickersUtilsProvider>

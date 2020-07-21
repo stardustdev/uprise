@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function PricingModal({ open, onClose, className, ...rest }) {
+function HelpModal({ open, onClose, className, ...rest }) {
   const classes = useStyles();
 
   return (
@@ -238,10 +238,10 @@ function PricingModal({ open, onClose, className, ...rest }) {
   );
 }
 
-PricingModal.propTypes = {
+HelpModal.propTypes = {
   className: PropTypes.string,
   onClose: PropTypes.func,
   open: PropTypes.bool,
 };
 
-export default PricingModal;
+export default HelpModal;

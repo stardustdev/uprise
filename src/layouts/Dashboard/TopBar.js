@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -13,25 +12,15 @@ import {
   IconButton,
   Toolbar,
   Hidden,
-  Input,
   colors,
-  Popper,
-  Paper,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ClickAwayListener,
 } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import HelpIcon from '@material-ui/icons/Help';
 import axios from 'src/utils/axios';
 import NotificationsPopover from 'src/components/NotificationsPopover';
-import PricingModal from 'src/components/PricingModal';
-import ChatBar from './ChatBar';
+import HelpModal from 'src/components/HelpModal';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,48 +29,7 @@ const useStyles = makeStyles(theme => ({
   flexGrow: {
     flexGrow: 1,
   },
-  search: {
-    backgroundColor: 'rgba(255,255,255, 0.1)',
-    borderRadius: 4,
-    flexBasis: 300,
-    height: 36,
-    padding: theme.spacing(0, 2),
-    display: 'flex',
-    alignItems: 'center',
-  },
-  searchIcon: {
-    marginRight: theme.spacing(2),
-    color: 'inherit',
-  },
-  searchInput: {
-    flexGrow: 1,
-    color: 'inherit',
-    '& input::placeholder': {
-      opacity: 1,
-      color: 'inherit',
-    },
-  },
-  searchPopper: {
-    zIndex: theme.zIndex.appBar + 100,
-  },
-  searchPopperContent: {
-    marginTop: theme.spacing(1),
-  },
-  trialButton: {
-    marginLeft: theme.spacing(2),
-    color: theme.palette.common.white,
-    backgroundColor: colors.green[600],
-    '&:hover': {
-      backgroundColor: colors.green[900],
-    },
-  },
-  trialIcon: {
-    marginRight: theme.spacing(1),
-  },
-  menuButton: {
-    marginRight: theme.spacing(1),
-  },
-  chatButton: {
+  helpButton: {
     marginLeft: theme.spacing(1),
   },
   notificationsButton: {
@@ -109,60 +57,11 @@ const popularSearches = [
 function TopBar({ onOpenNavBarMobile, className, ...rest }) {
   const classes = useStyles();
   const history = useHistory();
-  const searchRef = useRef(null);
   const dispatch = useDispatch();
   const notificationsRef = useRef(null);
-  const [openSearchPopover, setOpenSearchPopover] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
   const [notifications, setNotifications] = useState([]);
   const [openNotifications, setOpenNotifications] = useState(false);
-  const [openChatBar, setOpenChatBar] = useState(false);
-  const [pricingModalOpen, setPricingModalOpen] = useState(false);
-
-  const handleLogout = () => {
-    history.push('/auth/login');
-    // dispatch(logout());
-  };
-
-  const handlePricingModalOpen = () => {
-    setPricingModalOpen(true);
-  };
-
-  const handlePricingModalClose = () => {
-    setPricingModalOpen(false);
-  };
-
-  const handleChatBarOpen = () => {
-    setOpenChatBar(true);
-  };
-
-  const handleChatBarClose = () => {
-    setOpenChatBar(false);
-  };
-
-  const handleNotificationsOpen = () => {
-    setOpenNotifications(true);
-  };
-
-  const handleNotificationsClose = () => {
-    setOpenNotifications(false);
-  };
-
-  const handleSearchChange = event => {
-    setSearchValue(event.target.value);
-
-    if (event.target.value) {
-      if (!openSearchPopover) {
-        setOpenSearchPopover(true);
-      }
-    } else {
-      setOpenSearchPopover(false);
-    }
-  };
-
-  const handleSearchPopverClose = () => {
-    setOpenSearchPopover(false);
-  };
+  const [helpModalOpen, setHelpModalOpen] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -182,6 +81,27 @@ function TopBar({ onOpenNavBarMobile, className, ...rest }) {
     };
   }, []);
 
+  const handleLogout = () => {
+    history.push('/auth/login');
+    // dispatch(logout());
+  };
+
+  const handleHelpModalOpen = () => {
+    setHelpModalOpen(true);
+  };
+
+  const handlePricingModalClose = () => {
+    setHelpModalOpen(false);
+  };
+
+  const handleNotificationsOpen = () => {
+    setOpenNotifications(true);
+  };
+
+  const handleNotificationsClose = () => {
+    setOpenNotifications(false);
+  };
+
   return (
     <AppBar {...rest} className={clsx(classes.root, className)} color="primary">
       <Toolbar>
@@ -196,37 +116,10 @@ function TopBar({ onOpenNavBarMobile, className, ...rest }) {
         </Hidden>
         <img alt="Logo" src="/images/logos/uprise-logo-left.svg" />
         <div className={classes.flexGrow} />
-        <Hidden smDown>
-          <Popper
-            anchorEl={searchRef.current}
-            className={classes.searchPopper}
-            open={openSearchPopover}
-            transition
-          >
-            <ClickAwayListener onClickAway={handleSearchPopverClose}>
-              <Paper className={classes.searchPopperContent} elevation={3}>
-                <List>
-                  {popularSearches.map(search => (
-                    <ListItem
-                      button
-                      key={search}
-                      onClick={handleSearchPopverClose}
-                    >
-                      <ListItemIcon>
-                        <SearchIcon />
-                      </ListItemIcon>
-                      <ListItemText primary={search} />
-                    </ListItem>
-                  ))}
-                </List>
-              </Paper>
-            </ClickAwayListener>
-          </Popper>
-        </Hidden>
         <IconButton
-          className={classes.chatButton}
+          className={classes.helpButton}
           color="inherit"
-          onClick={handleChatBarOpen}
+          onClick={handleHelpModalOpen}
         >
           <HelpIcon />
         </IconButton>
@@ -259,8 +152,7 @@ function TopBar({ onOpenNavBarMobile, className, ...rest }) {
         onClose={handleNotificationsClose}
         open={openNotifications}
       />
-      <PricingModal onClose={handlePricingModalClose} open={pricingModalOpen} />
-      <ChatBar onClose={handleChatBarClose} open={openChatBar} />
+      <HelpModal onClose={handlePricingModalClose} open={helpModalOpen} />
     </AppBar>
   );
 }
