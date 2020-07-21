@@ -11,8 +11,8 @@ export default [
         icon: DashboardIcon,
       },
       {
-        title: 'Management',
-        href: '/management',
+        title: 'Campaigns',
+        href: '/campaigns',
         icon: BarChartIcon,
       },
       {
