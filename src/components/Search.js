@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
-import { Paper, Input } from '@material-ui/core';
+import { Paper, Button, Input } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles(theme => ({
@@ -25,7 +25,6 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   searchButton: {
-    backgroundColor: theme.palette.common.white,
     marginLeft: theme.spacing(2),
   },
 }));
@@ -43,6 +42,14 @@ function Search({ onSearch, className, ...rest }) {
           placeholder="Search"
         />
       </Paper>
+      <Button
+        className={classes.searchButton}
+        onClick={onSearch}
+        size="large"
+        variant="contained"
+      >
+        Search
+      </Button>
     </div>
   );
 }

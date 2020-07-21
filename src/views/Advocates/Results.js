@@ -10,7 +10,6 @@ import {
   CardHeader,
   Checkbox,
   Divider,
-  Link,
   Table,
   TableSortLabel,
   TableBody,
@@ -19,13 +18,14 @@ import {
   TablePagination,
   TableRow,
   Button,
+  Grid,
+  Avatar,
 } from '@material-ui/core';
-import GenericMoreButton from 'src/components/GenericMoreButton';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import InstagramIcon from '@material-ui/icons/Instagram';
+import { Facebook, LinkedIn, Instagram, ArrowDropUp } from '@material-ui/icons';
 
+import GenericMoreButton from 'src/components/GenericMoreButton';
 import Search from 'src/components/Search';
+import getInitials from 'src/utils/getInitials';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -75,12 +75,16 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'left',
+    alignItems: 'center',
   },
   iconGroup: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
+  },
+  nameCell: {
+    display: 'flex',
+    alignItems: 'center',
   },
   avatar: {
     height: 42,
@@ -101,6 +105,13 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     top: 20,
     width: 1,
+  },
+  delete_button: {
+    backgroundColor: theme.palette.error.light,
+    color: theme.palette.error.contrastText,
+    '&:hover': {
+      backgroundColor: theme.palette.error.dark,
+    },
   },
 }));
 
@@ -163,16 +174,33 @@ function Results({ className, customers, ...rest }) {
       <Card>
         <CardHeader
           className={classes.header}
-          action={
-            <div style={{ display: 'flex' }}>
-              <Search />
-              <Button color="secondary" variant="contained">
-                Delete Advocates
-              </Button>
-              <Button color="primary" variant="text">
-                Add Advocates
-              </Button>
-            </div>
+          title={
+            <Grid container spacing={2} xs={12}>
+              <Grid item xs={5}>
+                <Search />
+              </Grid>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={2}>
+                <Button
+                  className={classes.delete_button}
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                >
+                  Delete
+                </Button>
+              </Grid>
+              <Grid item lg={2}>
+                <Button
+                  color="primary"
+                  size="large"
+                  variant="contained"
+                  fullWidth
+                >
+                  Add
+                </Button>
+              </Grid>
+            </Grid>
           }
         />
         <Divider />
@@ -196,7 +224,7 @@ function Results({ className, customers, ...rest }) {
                     {headCells.map(headCell => (
                       <TableCell
                         key={headCell.id}
-                        align={headCell.numeric ? 'right' : 'left'}
+                        align="center"
                         padding={headCell.disablePadding ? 'none' : 'default'}
                         sortDirection={orderBy === headCell.id ? order : false}
                       >
@@ -204,6 +232,7 @@ function Results({ className, customers, ...rest }) {
                           active
                           direction={orderBy === headCell.id ? order : 'asc'}
                           onClick={e => handleRequestSort(e, headCell.id)}
+                          IconComponent={ArrowDropUp}
                         >
                           {headCell.label}
                           {orderBy === headCell.id ? (
@@ -244,16 +273,20 @@ function Results({ className, customers, ...rest }) {
                             }
                           />
                         </TableCell>
-                        <TableCell align="left">
-                          <div className={classes.cell}>
+                        <TableCell>
+                          <div className={classes.nameCell}>
+                            <Avatar
+                              className={classes.avatar}
+                              src={customer.avatar}
+                            >
+                              {getInitials(customer.name)}
+                            </Avatar>
                             <div>
-                              <Link color="inherit" variant="h6">
-                                {customer.name}
-                              </Link>
+                              <div>{customer.name}</div>
                               <div className={classes.iconGroup}>
-                                <FacebookIcon fontSize="small" />
-                                <LinkedInIcon fontSize="small" />
-                                <InstagramIcon fontSize="small" />
+                                <Facebook fontSize="small" />
+                                <LinkedIn fontSize="small" />
+                                <Instagram fontSize="small" />
                               </div>
                             </div>
                           </div>
@@ -266,8 +299,8 @@ function Results({ className, customers, ...rest }) {
                         </TableCell>
                         <TableCell align="center">
                           <div className={classes.cell}>
-                            <div>{customer.location}</div>
-                            <div>{customer.country}</div>
+                            <div>{customer.location.split(',')[0]}</div>
+                            <div>{customer.location.split(',')[1]}</div>
                           </div>
                         </TableCell>
                         <TableCell align="center">{customer.age}</TableCell>
