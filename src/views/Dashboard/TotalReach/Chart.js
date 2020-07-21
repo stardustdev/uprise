@@ -7,17 +7,15 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles(() => ({
   root: {
-    position: 'relative'
-  }
+    position: 'relative',
+  },
 }));
 
-function Chart({
-  className, data: dataProp, labels, ...rest
-}) {
+function Chart({ className, data: dataProp, labels, ...rest }) {
   const classes = useStyles();
   const theme = useTheme();
 
-  const data = (canvas) => {
+  const data = canvas => {
     const ctx = canvas.getContext('2d');
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
 
@@ -34,10 +32,10 @@ function Chart({
           pointBorderColor: '#FFFFFF',
           pointBorderWidth: 3,
           pointRadius: 6,
-          pointBackgroundColor: theme.palette.secondary.main
-        }
+          pointBackgroundColor: theme.palette.secondary.main,
+        },
       ],
-      labels
+      labels,
     };
   };
 
@@ -46,23 +44,23 @@ function Chart({
     maintainAspectRatio: false,
     animation: false,
     legend: {
-      display: false
+      display: false,
     },
     layout: {
-      padding: 0
+      padding: 0,
     },
     scales: {
       xAxes: [
         {
           gridLines: {
             display: false,
-            drawBorder: false
+            drawBorder: false,
           },
           ticks: {
             padding: 20,
-            fontColor: theme.palette.text.secondary
-          }
-        }
+            fontColor: theme.palette.text.secondary,
+          },
+        },
       ],
       yAxes: [
         {
@@ -73,7 +71,7 @@ function Chart({
             drawBorder: false,
             zeroLineBorderDash: [2],
             zeroLineBorderDashOffset: [2],
-            zeroLineColor: theme.palette.divider
+            zeroLineColor: theme.palette.divider,
           },
           ticks: {
             padding: 20,
@@ -81,10 +79,10 @@ function Chart({
             beginAtZero: true,
             min: 0,
             maxTicksLimit: 7,
-            callback: (value) => (value > 0 ? `${value}K` : value)
-          }
-        }
-      ]
+            callback: value => (value > 0 ? `${value}K` : value),
+          },
+        },
+      ],
     },
     tooltips: {
       enabled: true,
@@ -101,7 +99,7 @@ function Chart({
       footerFontColor: theme.palette.text.secondary,
       callbacks: {
         title: () => {},
-        label: (tooltipItem) => {
+        label: tooltipItem => {
           let label = `Income: ${tooltipItem.yLabel}`;
 
           if (tooltipItem.yLabel > 0) {
@@ -109,16 +107,13 @@ function Chart({
           }
 
           return label;
-        }
-      }
-    }
+        },
+      },
+    },
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Line
         data={data}
         options={options}
@@ -131,7 +126,7 @@ function Chart({
 Chart.propTypes = {
   className: PropTypes.string,
   data: PropTypes.array.isRequired,
-  labels: PropTypes.array.isRequired
+  labels: PropTypes.array.isRequired,
 };
 
 export default Chart;

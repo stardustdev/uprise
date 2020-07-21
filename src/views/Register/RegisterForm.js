@@ -178,10 +178,10 @@ function RegisterForm({ className, ...rest }) {
               name="policy"
               onChange={handleChange}
             />
-            <Typography color="textSecondary" variant="body1">
+            <Typography color="primary" variant="body1">
               I have read the{' '}
               <Link
-                color="secondary"
+                color="primary"
                 component={RouterLink}
                 to="#"
                 underline="always"
@@ -198,7 +198,7 @@ function RegisterForm({ className, ...rest }) {
       </div>
       <Button
         className={classes.submitButton}
-        color="secondary"
+        color="primary"
         disabled={!formState.isValid}
         size="large"
         type="submit"

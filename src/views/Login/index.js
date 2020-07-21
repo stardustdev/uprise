@@ -94,7 +94,7 @@ function Login() {
           <Divider className={classes.divider} />
           <Link
             align="center"
-            color="secondary"
+            color="primary"
             component={RouterLink}
             to="/auth/register"
             underline="always"

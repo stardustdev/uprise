@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/styles';
 import { Container, Grid } from '@material-ui/core';
 import axios from 'src/utils/axios';
 import Page from 'src/components/Page';
-// import SearchBar from 'src/components/SearchBar';
 import Header from './Header';
 import Results from './Results';
 import CampaignSchedule from 'src/components/CampaignSchedule';
@@ -81,7 +80,6 @@ function Advocates() {
     <Page className={classes.root} title="Customer Management List">
       <Container maxWidth={false}>
         <Header />
-        {/* <SearchBar onFilter={handleFilter} onSearch={handleSearch} /> */}
         <Grid container spacing={3}>
           <Grid item md={9}>
             <Results className={classes.results} customers={customers} />
