@@ -68,8 +68,12 @@ function UpcomingCampaign({ className, ...rest }) {
           {customers.map((customer, i) => (
             <ListItem divider={i < customers.length - 1} key={customer.id}>
               <ListItemAvatar className={classes.content}>
-                <Typography variant="h2">{new Date().getDay() - i}</Typography>
-                <Typography variant="h6">May</Typography>
+                <>
+                  <Typography variant="h2">
+                    {new Date().getDay() - i}
+                  </Typography>
+                  <Typography variant="h6">May</Typography>
+                </>
               </ListItemAvatar>
               <ListItemText
                 disableTypography

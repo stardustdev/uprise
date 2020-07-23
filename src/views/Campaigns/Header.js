@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Typography } from '@material-ui/core';
+import Search from 'src/components/Search';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -23,8 +24,11 @@ function Header({ className, ...rest }) {
       >
         <Grid item>
           <Typography component="h1" variant="h4">
-            ADVOCATES
+            All CAMPAIGNS
           </Typography>
+        </Grid>
+        <Grid item>
+          <Search />
         </Grid>
       </Grid>
     </div>
