@@ -167,12 +167,12 @@ function NavBar({ openMobile, onMobileClose, className, ...rest }) {
   const content = (
     <div {...rest} className={clsx(classes.root, className)}>
       <nav className={classes.navigation}>
-        {navConfig.map(list =>
+        {navConfig.map((list, index) =>
           renderNavItems({
             items: list.items,
             subheader: list.subheader,
             pathname: location.pathname,
-            key: list.subheader,
+            key: index,
           })
         )}
       </nav>

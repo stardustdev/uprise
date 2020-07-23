@@ -16,6 +16,7 @@ function Header({ className, ...rest }) {
       <Grid
         alignItems="flex-end"
         container
+        item
         justify="space-between"
         spacing={1}
         md={9}
