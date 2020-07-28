@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -10,19 +10,23 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Divider,
   Grid,
-  IconButton,
   Link,
-  Tooltip,
   Typography,
   colors,
+  ButtonGroup,
+  LinearProgress,
+  Divider,
 } from '@material-ui/core';
-import ShareIcon from '@material-ui/icons/Share';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import {
+  Message,
+  ThumbUp,
+  Share,
+  Facebook,
+  Twitter,
+  LinkedIn,
+} from '@material-ui/icons';
 import getInitials from 'src/utils/getInitials';
-import Label from 'src/components/Label';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -38,37 +42,29 @@ const useStyles = makeStyles(theme => ({
   description: {
     padding: theme.spacing(2, 3, 1, 3),
   },
-  tags: {
-    padding: theme.spacing(0, 3, 2, 3),
-    '& > * + *': {
-      marginLeft: theme.spacing(1),
-    },
+  action: {
+    margin: theme.spacing(1, 1, 0, 0),
+    textAlign: 'right',
   },
-  learnMoreButton: {
-    marginLeft: theme.spacing(2),
+  cover_image: {
+    objectFit: 'cover',
+    margin: theme.spacing(2, 1),
+    borderRadius: theme.spacing(0.5),
+    width: 'calc(100% - 16px)',
+    height: theme.spacing(30),
   },
-  likedButton: {
-    color: colors.red[600],
+  reach_out: {
+    margin: theme.spacing(2, 3, 1, 3),
   },
-  shareButton: {
-    marginLeft: theme.spacing(1),
-  },
-  details: {
-    padding: theme.spacing(2, 3),
+  progress: {
+    height: theme.spacing(1),
+    borderRadius: theme.spacing(0.5),
+    margin: theme.spacing(2, 0),
   },
 }));
 
 function CampaignCard({ project, className, ...rest }) {
   const classes = useStyles();
-  const [liked, setLiked] = useState(project.liked);
-
-  const handleLike = () => {
-    setLiked(true);
-  };
-
-  const handleUnlike = () => {
-    setLiked(false);
-  };
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -91,7 +87,6 @@ function CampaignCard({ project, className, ...rest }) {
             >
               {project.author.name}
             </Link>{' '}
-            | Updated: {moment(project.updated_at).fromNow()}
           </Typography>
         }
         title={
@@ -104,6 +99,14 @@ function CampaignCard({ project, className, ...rest }) {
             {project.title}
           </Link>
         }
+        action={
+          <div className={classes.action}>
+            <Typography variant="h6">Launch Date</Typography>
+            <Typography variant="body2">
+              {moment(project.created_at).format('LL')}
+            </Typography>
+          </div>
+        }
       />
       <CardContent className={classes.content}>
         <div className={classes.description}>
@@ -113,71 +116,60 @@ function CampaignCard({ project, className, ...rest }) {
             software.
           </Typography>
         </div>
-        <div className={classes.tags}>
-          {project.tags.map(tag => (
-            <Label color={tag.color} key={tag.text}>
-              {tag.text}
-            </Label>
-          ))}
-        </div>
+        <img
+          className={classes.cover_image}
+          src={project.cover_image}
+          alt="Something is wrong"
+        />
         <Divider />
-        <div className={classes.details}>
-          <Grid
-            alignItems="center"
-            container
-            justify="space-between"
-            spacing={3}
-          >
-            <Grid item>
-              <Typography variant="h5">${project.price}</Typography>
-              <Typography variant="body2">Per Project</Typography>
+        <ButtonGroup fullWidth variant="text">
+          <Button>All</Button>
+          <Button>
+            <Facebook style={{ color: colors.blue[700] }} />
+          </Button>
+          <Button>
+            <Twitter style={{ color: colors.blue[500] }} />
+          </Button>
+          <Button>
+            <LinkedIn style={{ color: colors.blue[900] }} />
+          </Button>
+        </ButtonGroup>
+        <Divider />
+        <div className={classes.reach_out}>
+          <Grid container>
+            <Grid item xs={6}>
+              <Typography variant="body2">ADVOCATES SHARE</Typography>
+              <Typography variant="h3">80%</Typography>
             </Grid>
-            <Grid item>
-              <Typography variant="h5">{project.location}</Typography>
-              <Typography variant="body2">Location</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="h5">{project.type}</Typography>
-              <Typography variant="body2">Type</Typography>
-            </Grid>
-            <Grid item>
-              {liked ? (
-                <Tooltip title="Unlike">
-                  <IconButton
-                    className={classes.likedButton}
-                    onClick={handleUnlike}
-                    size="small"
-                  >
-                    <FavoriteIcon />
-                  </IconButton>
-                </Tooltip>
-              ) : (
-                <Tooltip title="Like">
-                  <IconButton
-                    className={classes.likeButton}
-                    onClick={handleLike}
-                    size="small"
-                  >
-                    <FavoriteBorderIcon />
-                  </IconButton>
-                </Tooltip>
-              )}
-              <Tooltip title="Share">
-                <IconButton className={classes.shareButton} size="small">
-                  <ShareIcon />
-                </IconButton>
-              </Tooltip>
-              <Button
-                className={classes.learnMoreButton}
-                component={RouterLink}
-                size="small"
-                to="/projects/1/overview"
-              >
-                Learn more
-              </Button>
+            <Grid item xs={6}>
+              <Typography variant="body2" align="right">
+                REACH
+              </Typography>
+              <Typography variant="h3" align="right">
+                720,456
+              </Typography>
             </Grid>
           </Grid>
+          <LinearProgress
+            classes={{
+              root: classes.progress,
+            }}
+            variant="determinate"
+            value={80}
+          />
         </div>
+        <Divider />
+        <ButtonGroup fullWidth>
+          <Button startIcon={<ThumbUp />} variant="text" size="large">
+            12,345
+          </Button>
+          <Button startIcon={<Message />} variant="text" size="large">
+            3,569
+          </Button>
+          <Button startIcon={<Share />} variant="text" size="large">
+            888,888
+          </Button>
+        </ButtonGroup>
       </CardContent>
     </Card>
   );
