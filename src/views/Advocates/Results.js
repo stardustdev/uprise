@@ -245,8 +245,6 @@ function Results({ className, customers, ...rest }) {
                         </TableSortLabel>
                       </TableCell>
                     ))}
-
-                    <TableCell align="center">TESTING</TableCell>
                     <TableCell align="center"></TableCell>
                   </TableRow>
                 </TableHead>
@@ -306,16 +304,6 @@ function Results({ className, customers, ...rest }) {
                         <TableCell align="center">{customer.age}</TableCell>
                         <TableCell align="center">{customer.gender}</TableCell>
                         <TableCell align="center">{customer.reach}</TableCell>
-                        <TableCell align="center">
-                          <Checkbox
-                            checked
-                            color="primary"
-                            disabled={customer.testing}
-                            value={
-                              selectedCustomers.indexOf(customer.id) !== -1
-                            }
-                          />
-                        </TableCell>
                         <TableCell align="center">
                           <GenericMoreButton />
                         </TableCell>
