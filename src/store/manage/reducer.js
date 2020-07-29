@@ -31,9 +31,8 @@ const manageReducer = (state = initialState, action) => {
           state: true,
         },
       };
-    default: {
+    default:
       return state;
-    }
   }
 };
 

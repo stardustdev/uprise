@@ -21,11 +21,13 @@ import {
   Grid,
   Avatar,
 } from '@material-ui/core';
-import { Facebook, LinkedIn, Instagram, ArrowDropUp } from '@material-ui/icons';
+import { ArrowDropUp } from '@material-ui/icons';
 
+import { Facebook, Instagram, LinkedIn } from 'src/components/IconButtons';
 import GenericMoreButton from 'src/components/GenericMoreButton';
 import Search from 'src/components/Search';
 import getInitials from 'src/utils/getInitials';
+import NewAdvocateModal from './NewAdvocateModal';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -122,6 +124,7 @@ function Results({ className, customers, ...rest }) {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
+  const [openNewAdvocateModel, setOpenNewAdvocateModal] = useState(false);
 
   const handleSelectAll = event => {
     const selectedCustomers = event.target.checked
@@ -175,7 +178,7 @@ function Results({ className, customers, ...rest }) {
         <CardHeader
           className={classes.header}
           title={
-            <Grid container spacing={2} xs={12}>
+            <Grid container spacing={2}>
               <Grid item xs={5}>
                 <Search />
               </Grid>
@@ -196,6 +199,7 @@ function Results({ className, customers, ...rest }) {
                   size="large"
                   variant="contained"
                   fullWidth
+                  onClick={() => setOpenNewAdvocateModal(true)}
                 >
                   Add
                 </Button>
@@ -227,6 +231,7 @@ function Results({ className, customers, ...rest }) {
                         align="center"
                         padding={headCell.disablePadding ? 'none' : 'default'}
                         sortDirection={orderBy === headCell.id ? order : false}
+                        width="300"
                       >
                         <TableSortLabel
                           active
@@ -245,8 +250,6 @@ function Results({ className, customers, ...rest }) {
                         </TableSortLabel>
                       </TableCell>
                     ))}
-
-                    <TableCell align="center">TESTING</TableCell>
                     <TableCell align="center"></TableCell>
                   </TableRow>
                 </TableHead>
@@ -284,9 +287,9 @@ function Results({ className, customers, ...rest }) {
                             <div>
                               <div>{customer.name}</div>
                               <div className={classes.iconGroup}>
-                                <Facebook fontSize="small" />
-                                <LinkedIn fontSize="small" />
-                                <Instagram fontSize="small" />
+                                <Facebook />
+                                <LinkedIn />
+                                <Instagram />
                               </div>
                             </div>
                           </div>
@@ -306,16 +309,6 @@ function Results({ className, customers, ...rest }) {
                         <TableCell align="center">{customer.age}</TableCell>
                         <TableCell align="center">{customer.gender}</TableCell>
                         <TableCell align="center">{customer.reach}</TableCell>
-                        <TableCell align="center">
-                          <Checkbox
-                            checked
-                            color="primary"
-                            disabled={customer.testing}
-                            value={
-                              selectedCustomers.indexOf(customer.id) !== -1
-                            }
-                          />
-                        </TableCell>
                         <TableCell align="center">
                           <GenericMoreButton />
                         </TableCell>
@@ -338,6 +331,10 @@ function Results({ className, customers, ...rest }) {
           />
         </CardActions>
       </Card>
+      <NewAdvocateModal
+        open={openNewAdvocateModel}
+        onClose={() => setOpenNewAdvocateModal(false)}
+      />
     </div>
   );
 }
