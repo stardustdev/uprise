@@ -6,7 +6,7 @@ const StatByRegion = () => {
   return (
     <div>
       <Card>
-        <USAMap width={'100%'} height={420} />
+        <USAMap width={580} height={420} />
       </Card>
     </div>
   );
