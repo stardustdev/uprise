@@ -90,7 +90,7 @@ function HelpModal({ open, onClose, className, ...rest }) {
           </Typography>
         </div>
         <div className={classes.content}>
-          <Typography variant="h4" gutterBottom marginTop>
+          <Typography variant="h4" gutterBottom>
             Subject*
           </Typography>
           <InputBase

@@ -71,9 +71,24 @@ export default [
         component: lazy(() => import('src/views/Advocates')),
       },
       {
+        path: '/advocates/create',
+        exact: true,
+        component: lazy(() => import('src/views/Advocates/Create')),
+      },
+      {
+        path: '/advocates/edit/:id',
+        exact: true,
+        component: lazy(() => import('src/views/Advocates')),
+      },
+      {
         path: '/campaigns',
         exact: true,
         component: lazy(() => import('src/views/Campaigns')),
+      },
+      {
+        path: '/campaigns/preview',
+        exact: true,
+        component: lazy(() => import('src/views/Campaigns/Preview')),
       },
       {
         component: () => <Redirect to="/errors/error-404" />,

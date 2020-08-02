@@ -11,7 +11,7 @@ function* getAdvocateList(actionData) {
     // const { searchKey, pagination, sort } = actionData.payload;
     const response = yield axios.get(Constatns.API_DOMAIN + 'advocates');
     if (response.data) {
-      yield put(actions.getAdvocateListSuccess(response.data));
+      yield put(actions.getAdvocateListSuccess(response.data.advocates));
     }
   } catch (error) {
     yield put(manageActions.setErrorMessage(error));

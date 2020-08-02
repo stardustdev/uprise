@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 function StatByAge({ className, ...rest }) {
   const classes = useStyles();
 
-  const data = [18, 16, 5, 8, 3, 14, 14, 16, 17, 19, 18, 20];
+  const data = [18, 16, 5, 8, 3, 14];
 
   const labels = ['<20', '30', '40', '50', '60', '70<'];
 
