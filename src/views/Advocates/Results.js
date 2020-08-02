@@ -26,8 +26,8 @@ import { ArrowDropUp } from '@material-ui/icons';
 import { Facebook, Instagram, LinkedIn } from 'src/components/IconButtons';
 import GenericMoreButton from 'src/components/GenericMoreButton';
 import Search from 'src/components/Search';
+import history from 'src/utils/history';
 import getInitials from 'src/utils/getInitials';
-import NewAdvocateModal from './NewAdvocateModal';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -124,7 +124,6 @@ function Results({ className, customers, ...rest }) {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
-  const [openNewAdvocateModel, setOpenNewAdvocateModal] = useState(false);
 
   const handleSelectAll = event => {
     const selectedCustomers = event.target.checked
@@ -199,7 +198,7 @@ function Results({ className, customers, ...rest }) {
                   size="large"
                   variant="contained"
                   fullWidth
-                  onClick={() => setOpenNewAdvocateModal(true)}
+                  onClick={() => history.push('/advocates/create')}
                 >
                   Add
                 </Button>
@@ -331,10 +330,6 @@ function Results({ className, customers, ...rest }) {
           />
         </CardActions>
       </Card>
-      <NewAdvocateModal
-        open={openNewAdvocateModel}
-        onClose={() => setOpenNewAdvocateModal(false)}
-      />
     </div>
   );
 }

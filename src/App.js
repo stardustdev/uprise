@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Router } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
-import { createBrowserHistory } from 'history';
 import MomentUtils from '@date-io/moment';
 import { Provider as StoreProvider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
@@ -12,14 +11,13 @@ import store from './store';
 import routes from './routes';
 import ScrollReset from './components/ScrollReset';
 import StylesProvider from './components/StylesProvider';
+import history from './utils/history';
 import './mixins/chartjs';
 import './mixins/moment';
 import './mixins/validate';
 import './mixins/prismjs';
 import './mock';
 import './assets/scss/main.scss';
-
-const history = createBrowserHistory();
 
 function App() {
   const [direction] = useState('ltr');
