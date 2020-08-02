@@ -86,6 +86,11 @@ export default [
         component: lazy(() => import('src/views/Campaigns')),
       },
       {
+        path: '/campaigns/preview',
+        exact: true,
+        component: lazy(() => import('src/views/Campaigns/Preview')),
+      },
+      {
         component: () => <Redirect to="/errors/error-404" />,
       },
     ],
